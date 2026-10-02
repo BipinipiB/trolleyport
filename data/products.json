@@ -1,0 +1,40 @@
+{
+  "currency": "NZD",
+  "products": [
+    { "id": "prod-001", "name": "Bananas", "category": "Produce", "unit": "1kg", "price": 3.49, "isVegetarian": true, "inStock": true, "onDeal": true, "dealPrice": 2.99 },
+    { "id": "prod-002", "name": "Royal Gala Apples", "category": "Produce", "unit": "1kg", "price": 4.99, "isVegetarian": true, "inStock": true, "onDeal": false, "dealPrice": null },
+    { "id": "prod-003", "name": "Carrots", "category": "Produce", "unit": "1kg", "price": 2.49, "isVegetarian": true, "inStock": true, "onDeal": false, "dealPrice": null },
+    { "id": "prod-004", "name": "Broccoli", "category": "Produce", "unit": "each", "price": 2.99, "isVegetarian": true, "inStock": true, "onDeal": true, "dealPrice": 1.99 },
+    { "id": "prod-005", "name": "Baby Spinach", "category": "Produce", "unit": "120g", "price": 3.99, "isVegetarian": true, "inStock": true, "onDeal": false, "dealPrice": null },
+    { "id": "prod-006", "name": "Tomatoes", "category": "Produce", "unit": "1kg", "price": 6.99, "isVegetarian": true, "inStock": true, "onDeal": false, "dealPrice": null },
+    { "id": "prod-007", "name": "Avocado", "category": "Produce", "unit": "each", "price": 2.49, "isVegetarian": true, "inStock": true, "onDeal": true, "dealPrice": 1.49 },
+
+    { "id": "prod-008", "name": "Standard Milk", "category": "Dairy", "unit": "2L", "price": 4.49, "isVegetarian": true, "inStock": true, "onDeal": false, "dealPrice": null },
+    { "id": "prod-009", "name": "Greek Yoghurt", "category": "Dairy", "unit": "1kg", "price": 6.99, "isVegetarian": true, "inStock": true, "onDeal": true, "dealPrice": 5.49 },
+    { "id": "prod-010", "name": "Tasty Cheddar Cheese", "category": "Dairy", "unit": "500g", "price": 9.99, "isVegetarian": true, "inStock": true, "onDeal": false, "dealPrice": null },
+    { "id": "prod-011", "name": "Salted Butter", "category": "Dairy", "unit": "500g", "price": 6.49, "isVegetarian": true, "inStock": true, "onDeal": false, "dealPrice": null },
+    { "id": "prod-012", "name": "Free Range Eggs", "category": "Dairy", "unit": "12 pack", "price": 8.99, "isVegetarian": true, "inStock": true, "onDeal": false, "dealPrice": null },
+
+    { "id": "prod-013", "name": "Wholemeal Sandwich Bread", "category": "Bakery", "unit": "700g", "price": 3.79, "isVegetarian": true, "inStock": true, "onDeal": false, "dealPrice": null },
+    { "id": "prod-014", "name": "Sourdough Loaf", "category": "Bakery", "unit": "each", "price": 6.49, "isVegetarian": true, "inStock": true, "onDeal": true, "dealPrice": 4.99 },
+    { "id": "prod-015", "name": "Butter Croissants", "category": "Bakery", "unit": "4 pack", "price": 5.99, "isVegetarian": true, "inStock": true, "onDeal": false, "dealPrice": null },
+    { "id": "prod-016", "name": "Plain Bagels", "category": "Bakery", "unit": "6 pack", "price": 4.99, "isVegetarian": true, "inStock": true, "onDeal": false, "dealPrice": null },
+
+    { "id": "prod-017", "name": "Chicken Breast", "category": "Meat & Protein", "unit": "1kg", "price": 14.99, "isVegetarian": false, "inStock": true, "onDeal": true, "dealPrice": 11.99 },
+    { "id": "prod-018", "name": "Beef Mince", "category": "Meat & Protein", "unit": "500g", "price": 9.49, "isVegetarian": false, "inStock": true, "onDeal": false, "dealPrice": null },
+    { "id": "prod-019", "name": "Salmon Fillets", "category": "Meat & Protein", "unit": "2 pack, 240g", "price": 13.99, "isVegetarian": false, "inStock": true, "onDeal": false, "dealPrice": null },
+    { "id": "prod-020", "name": "Streaky Bacon", "category": "Meat & Protein", "unit": "250g", "price": 6.99, "isVegetarian": false, "inStock": true, "onDeal": false, "dealPrice": null },
+    { "id": "prod-021", "name": "Firm Tofu", "category": "Meat & Protein", "unit": "450g", "price": 4.49, "isVegetarian": true, "inStock": true, "onDeal": false, "dealPrice": null },
+
+    { "id": "prod-022", "name": "Ready Salted Potato Chips", "category": "Snacks", "unit": "150g", "price": 3.49, "isVegetarian": true, "inStock": true, "onDeal": true, "dealPrice": 2.50 },
+    { "id": "prod-023", "name": "Dark Chocolate", "category": "Snacks", "unit": "100g", "price": 3.99, "isVegetarian": true, "inStock": true, "onDeal": false, "dealPrice": null },
+    { "id": "prod-024", "name": "Roasted Mixed Nuts", "category": "Snacks", "unit": "300g", "price": 8.99, "isVegetarian": true, "inStock": true, "onDeal": false, "dealPrice": null },
+    { "id": "prod-025", "name": "Muesli Bars", "category": "Snacks", "unit": "6 pack", "price": 4.29, "isVegetarian": true, "inStock": true, "onDeal": false, "dealPrice": null },
+
+    { "id": "prod-026", "name": "Basmati Rice", "category": "Pantry", "unit": "1kg", "price": 4.99, "isVegetarian": true, "inStock": true, "onDeal": false, "dealPrice": null },
+    { "id": "prod-027", "name": "Spaghetti", "category": "Pantry", "unit": "500g", "price": 1.99, "isVegetarian": true, "inStock": true, "onDeal": false, "dealPrice": null },
+    { "id": "prod-028", "name": "Tomato Pasta Sauce", "category": "Pantry", "unit": "500g", "price": 3.49, "isVegetarian": true, "inStock": true, "onDeal": true, "dealPrice": 2.79 },
+    { "id": "prod-029", "name": "Rolled Oats", "category": "Pantry", "unit": "750g", "price": 2.99, "isVegetarian": true, "inStock": true, "onDeal": false, "dealPrice": null },
+    { "id": "prod-030", "name": "Smooth Peanut Butter", "category": "Pantry", "unit": "375g", "price": 4.99, "isVegetarian": true, "inStock": true, "onDeal": false, "dealPrice": null }
+  ]
+}

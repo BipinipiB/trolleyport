@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>df5ccbec-e7ec-445a-9348-3eb59a8f53a2</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Anthropic.Foundry" Version="0.7.1" />
+  </ItemGroup>
+
+</Project>

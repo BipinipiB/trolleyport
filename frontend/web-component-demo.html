@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Do My Shopping Demo</title>
+    <style>
+      :root { color-scheme: light dark; }
+      body { margin: 0; padding: 24px 16px; font-family: system-ui, sans-serif; background: Canvas; color: CanvasText; }
+    </style>
+  </head>
+  <body>
+    <!-- Plain HTML page with no React: shows <do-my-shopping-button> works on its own.
+         Dev server only: http://localhost:5173/web-component-demo.html -->
+    <h1>Embedding demo (no framework)</h1>
+    <p>This page loads only the custom element module.</p>
+    <do-my-shopping-button label="Do my shopping" api-base="http://localhost:5080"></do-my-shopping-button>
+    <script type="module" src="/src/web-components/do-my-shopping-button.ts"></script>
+  </body>
+</html>

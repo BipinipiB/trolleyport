@@ -1,0 +1,473 @@
+{
+  "currency": "NZD",
+  "shopper": {
+    "id": "shopper-001",
+    "name": "Sam Taylor",
+    "household": "2 adults",
+    "usualShoppingDay": "Saturday"
+  },
+  "orders": [
+    {
+      "orderId": "order-001",
+      "date": "2026-08-22",
+      "items": [
+        {
+          "productId": "prod-008",
+          "name": "Standard Milk",
+          "quantity": 2,
+          "unitPrice": 4.49,
+          "lineTotal": 8.98
+        },
+        {
+          "productId": "prod-013",
+          "name": "Wholemeal Sandwich Bread",
+          "quantity": 1,
+          "unitPrice": 3.79,
+          "lineTotal": 3.79
+        },
+        {
+          "productId": "prod-001",
+          "name": "Bananas",
+          "quantity": 1,
+          "unitPrice": 3.49,
+          "lineTotal": 3.49
+        },
+        {
+          "productId": "prod-009",
+          "name": "Greek Yoghurt",
+          "quantity": 1,
+          "unitPrice": 6.99,
+          "lineTotal": 6.99
+        },
+        {
+          "productId": "prod-017",
+          "name": "Chicken Breast",
+          "quantity": 1,
+          "unitPrice": 14.99,
+          "lineTotal": 14.99
+        },
+        {
+          "productId": "prod-012",
+          "name": "Free Range Eggs",
+          "quantity": 1,
+          "unitPrice": 8.99,
+          "lineTotal": 8.99
+        },
+        {
+          "productId": "prod-003",
+          "name": "Carrots",
+          "quantity": 1,
+          "unitPrice": 2.49,
+          "lineTotal": 2.49
+        },
+        {
+          "productId": "prod-027",
+          "name": "Spaghetti",
+          "quantity": 2,
+          "unitPrice": 1.99,
+          "lineTotal": 3.98
+        },
+        {
+          "productId": "prod-028",
+          "name": "Tomato Pasta Sauce",
+          "quantity": 1,
+          "unitPrice": 3.49,
+          "lineTotal": 3.49
+        },
+        {
+          "productId": "prod-023",
+          "name": "Dark Chocolate",
+          "quantity": 1,
+          "unitPrice": 3.99,
+          "lineTotal": 3.99
+        }
+      ],
+      "total": 61.18
+    },
+    {
+      "orderId": "order-002",
+      "date": "2026-08-29",
+      "items": [
+        {
+          "productId": "prod-008",
+          "name": "Standard Milk",
+          "quantity": 2,
+          "unitPrice": 4.49,
+          "lineTotal": 8.98
+        },
+        {
+          "productId": "prod-013",
+          "name": "Wholemeal Sandwich Bread",
+          "quantity": 1,
+          "unitPrice": 3.79,
+          "lineTotal": 3.79
+        },
+        {
+          "productId": "prod-001",
+          "name": "Bananas",
+          "quantity": 1,
+          "unitPrice": 2.99,
+          "lineTotal": 2.99
+        },
+        {
+          "productId": "prod-009",
+          "name": "Greek Yoghurt",
+          "quantity": 1,
+          "unitPrice": 6.99,
+          "lineTotal": 6.99
+        },
+        {
+          "productId": "prod-017",
+          "name": "Chicken Breast",
+          "quantity": 1,
+          "unitPrice": 11.99,
+          "lineTotal": 11.99
+        },
+        {
+          "productId": "prod-004",
+          "name": "Broccoli",
+          "quantity": 2,
+          "unitPrice": 2.99,
+          "lineTotal": 5.98
+        },
+        {
+          "productId": "prod-026",
+          "name": "Basmati Rice",
+          "quantity": 1,
+          "unitPrice": 4.99,
+          "lineTotal": 4.99
+        },
+        {
+          "productId": "prod-010",
+          "name": "Tasty Cheddar Cheese",
+          "quantity": 1,
+          "unitPrice": 9.99,
+          "lineTotal": 9.99
+        },
+        {
+          "productId": "prod-022",
+          "name": "Ready Salted Potato Chips",
+          "quantity": 2,
+          "unitPrice": 2.5,
+          "lineTotal": 5
+        }
+      ],
+      "total": 60.7
+    },
+    {
+      "orderId": "order-003",
+      "date": "2026-09-05",
+      "items": [
+        {
+          "productId": "prod-008",
+          "name": "Standard Milk",
+          "quantity": 2,
+          "unitPrice": 4.49,
+          "lineTotal": 8.98
+        },
+        {
+          "productId": "prod-013",
+          "name": "Wholemeal Sandwich Bread",
+          "quantity": 1,
+          "unitPrice": 3.79,
+          "lineTotal": 3.79
+        },
+        {
+          "productId": "prod-001",
+          "name": "Bananas",
+          "quantity": 1,
+          "unitPrice": 3.49,
+          "lineTotal": 3.49
+        },
+        {
+          "productId": "prod-012",
+          "name": "Free Range Eggs",
+          "quantity": 1,
+          "unitPrice": 8.99,
+          "lineTotal": 8.99
+        },
+        {
+          "productId": "prod-018",
+          "name": "Beef Mince",
+          "quantity": 1,
+          "unitPrice": 9.49,
+          "lineTotal": 9.49
+        },
+        {
+          "productId": "prod-006",
+          "name": "Tomatoes",
+          "quantity": 1,
+          "unitPrice": 6.99,
+          "lineTotal": 6.99
+        },
+        {
+          "productId": "prod-027",
+          "name": "Spaghetti",
+          "quantity": 1,
+          "unitPrice": 1.99,
+          "lineTotal": 1.99
+        },
+        {
+          "productId": "prod-028",
+          "name": "Tomato Pasta Sauce",
+          "quantity": 2,
+          "unitPrice": 3.49,
+          "lineTotal": 6.98
+        },
+        {
+          "productId": "prod-015",
+          "name": "Butter Croissants",
+          "quantity": 1,
+          "unitPrice": 5.99,
+          "lineTotal": 5.99
+        },
+        {
+          "productId": "prod-025",
+          "name": "Muesli Bars",
+          "quantity": 1,
+          "unitPrice": 4.29,
+          "lineTotal": 4.29
+        }
+      ],
+      "total": 60.98
+    },
+    {
+      "orderId": "order-004",
+      "date": "2026-09-12",
+      "items": [
+        {
+          "productId": "prod-008",
+          "name": "Standard Milk",
+          "quantity": 2,
+          "unitPrice": 4.49,
+          "lineTotal": 8.98
+        },
+        {
+          "productId": "prod-013",
+          "name": "Wholemeal Sandwich Bread",
+          "quantity": 1,
+          "unitPrice": 3.79,
+          "lineTotal": 3.79
+        },
+        {
+          "productId": "prod-001",
+          "name": "Bananas",
+          "quantity": 1,
+          "unitPrice": 3.49,
+          "lineTotal": 3.49
+        },
+        {
+          "productId": "prod-009",
+          "name": "Greek Yoghurt",
+          "quantity": 1,
+          "unitPrice": 5.49,
+          "lineTotal": 5.49
+        },
+        {
+          "productId": "prod-017",
+          "name": "Chicken Breast",
+          "quantity": 1,
+          "unitPrice": 14.99,
+          "lineTotal": 14.99
+        },
+        {
+          "productId": "prod-012",
+          "name": "Free Range Eggs",
+          "quantity": 1,
+          "unitPrice": 8.99,
+          "lineTotal": 8.99
+        },
+        {
+          "productId": "prod-005",
+          "name": "Baby Spinach",
+          "quantity": 1,
+          "unitPrice": 3.99,
+          "lineTotal": 3.99
+        },
+        {
+          "productId": "prod-007",
+          "name": "Avocado",
+          "quantity": 3,
+          "unitPrice": 1.49,
+          "lineTotal": 4.47
+        },
+        {
+          "productId": "prod-019",
+          "name": "Salmon Fillets",
+          "quantity": 1,
+          "unitPrice": 13.99,
+          "lineTotal": 13.99
+        },
+        {
+          "productId": "prod-029",
+          "name": "Rolled Oats",
+          "quantity": 1,
+          "unitPrice": 2.99,
+          "lineTotal": 2.99
+        }
+      ],
+      "total": 71.17
+    },
+    {
+      "orderId": "order-005",
+      "date": "2026-09-19",
+      "items": [
+        {
+          "productId": "prod-008",
+          "name": "Standard Milk",
+          "quantity": 2,
+          "unitPrice": 4.49,
+          "lineTotal": 8.98
+        },
+        {
+          "productId": "prod-013",
+          "name": "Wholemeal Sandwich Bread",
+          "quantity": 1,
+          "unitPrice": 3.79,
+          "lineTotal": 3.79
+        },
+        {
+          "productId": "prod-001",
+          "name": "Bananas",
+          "quantity": 1,
+          "unitPrice": 3.49,
+          "lineTotal": 3.49
+        },
+        {
+          "productId": "prod-009",
+          "name": "Greek Yoghurt",
+          "quantity": 1,
+          "unitPrice": 6.99,
+          "lineTotal": 6.99
+        },
+        {
+          "productId": "prod-017",
+          "name": "Chicken Breast",
+          "quantity": 1,
+          "unitPrice": 14.99,
+          "lineTotal": 14.99
+        },
+        {
+          "productId": "prod-003",
+          "name": "Carrots",
+          "quantity": 1,
+          "unitPrice": 2.49,
+          "lineTotal": 2.49
+        },
+        {
+          "productId": "prod-002",
+          "name": "Royal Gala Apples",
+          "quantity": 1,
+          "unitPrice": 4.99,
+          "lineTotal": 4.99
+        },
+        {
+          "productId": "prod-011",
+          "name": "Salted Butter",
+          "quantity": 1,
+          "unitPrice": 6.49,
+          "lineTotal": 6.49
+        },
+        {
+          "productId": "prod-020",
+          "name": "Streaky Bacon",
+          "quantity": 1,
+          "unitPrice": 6.99,
+          "lineTotal": 6.99
+        },
+        {
+          "productId": "prod-014",
+          "name": "Sourdough Loaf",
+          "quantity": 1,
+          "unitPrice": 6.49,
+          "lineTotal": 6.49
+        }
+      ],
+      "total": 65.69
+    },
+    {
+      "orderId": "order-006",
+      "date": "2026-09-26",
+      "items": [
+        {
+          "productId": "prod-008",
+          "name": "Standard Milk",
+          "quantity": 3,
+          "unitPrice": 4.49,
+          "lineTotal": 13.47
+        },
+        {
+          "productId": "prod-013",
+          "name": "Wholemeal Sandwich Bread",
+          "quantity": 1,
+          "unitPrice": 3.79,
+          "lineTotal": 3.79
+        },
+        {
+          "productId": "prod-001",
+          "name": "Bananas",
+          "quantity": 1,
+          "unitPrice": 2.99,
+          "lineTotal": 2.99
+        },
+        {
+          "productId": "prod-009",
+          "name": "Greek Yoghurt",
+          "quantity": 1,
+          "unitPrice": 6.99,
+          "lineTotal": 6.99
+        },
+        {
+          "productId": "prod-017",
+          "name": "Chicken Breast",
+          "quantity": 1,
+          "unitPrice": 11.99,
+          "lineTotal": 11.99
+        },
+        {
+          "productId": "prod-012",
+          "name": "Free Range Eggs",
+          "quantity": 1,
+          "unitPrice": 8.99,
+          "lineTotal": 8.99
+        },
+        {
+          "productId": "prod-004",
+          "name": "Broccoli",
+          "quantity": 1,
+          "unitPrice": 1.99,
+          "lineTotal": 1.99
+        },
+        {
+          "productId": "prod-021",
+          "name": "Firm Tofu",
+          "quantity": 1,
+          "unitPrice": 4.49,
+          "lineTotal": 4.49
+        },
+        {
+          "productId": "prod-030",
+          "name": "Smooth Peanut Butter",
+          "quantity": 1,
+          "unitPrice": 4.99,
+          "lineTotal": 4.99
+        },
+        {
+          "productId": "prod-024",
+          "name": "Roasted Mixed Nuts",
+          "quantity": 1,
+          "unitPrice": 8.99,
+          "lineTotal": 8.99
+        },
+        {
+          "productId": "prod-022",
+          "name": "Ready Salted Potato Chips",
+          "quantity": 1,
+          "unitPrice": 2.5,
+          "lineTotal": 2.5
+        }
+      ],
+      "total": 71.18
+    }
+  ]
+}

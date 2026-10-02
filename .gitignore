@@ -1,0 +1,25 @@
+# .NET build output and IDE files
+bin/
+obj/
+.vs/
+*.user
+*.suo
+
+# Node dependencies and build output
+node_modules/
+dist/
+
+# Secrets and local environment — never commit keys
+# (the Foundry API key lives in .NET User Secrets, outside this folder)
+.env
+.env.*
+!.env.example
+secrets.json
+appsettings.*.local.json
+
+# Local tooling and OS files
+.claude/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
