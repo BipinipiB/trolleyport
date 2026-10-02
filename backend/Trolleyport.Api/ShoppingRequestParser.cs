@@ -18,15 +18,19 @@ public record ParseRequestBody(string? Text, IReadOnlyList<FollowUp>? FollowUps)
 /// <param name="NoBudget">True when the shopper explicitly said there is no budget (Budget is then null).</param>
 public record ParsedShoppingRequest(decimal? Budget, string? Diet, bool SeekDeals, string? OtherDietaryNeeds, bool NoBudget = false);
 
-/// <param name="Status">"parsed" when every required field is clear, otherwise "needs_clarification".</param>
+/// <param name="Status">"parsed" when every required field is clear; "needs_clarification" when the budget or diet
+/// needs a question; "off_topic" when the shopper's latest message isn't about grocery shopping at all.</param>
 /// <param name="ClarifyingQuestion">Set only when Status is "needs_clarification".</param>
+/// <param name="Redirect">Set only when Status is "off_topic": a friendly nudge back to shopping. The off-topic message
+/// should not be treated as part of the shopping request (or as an answer to a pending question).</param>
 /// <param name="Model">Raw fields as the model returned them, before server-side rules — shown for verification.</param>
 public record ParseResponse(
     string Status,
     ParsedShoppingRequest Parsed,
     string? ClarifyingQuestion,
     ModelExtraction Model,
-    ParseUsage Usage);
+    ParseUsage Usage,
+    string? Redirect = null);
 
 public record ParseUsage(long InputTokens, long OutputTokens, long ElapsedMs);
 
@@ -38,6 +42,8 @@ public record ModelExtraction(
     string DietStatus,       // stated | not_mentioned | ambiguous
     bool SeekDeals,
     string? OtherDietaryNeeds,
+    bool OffTopic,
+    string? OffTopicReply,
     string? ClarifyingQuestion);
 
 /// <summary>
@@ -76,7 +82,16 @@ public sealed class ShoppingRequestParser(ClaudeFoundry claude, ILogger<Shopping
           A short phrase in the shopper's own terms; combine several with commas. null if none. Mentioning one of
           these does not count as mentioning vegetarian/vegan/no restriction, so leave diet as it would otherwise be.
 
-        clarifyingQuestion: if budgetStatus is "missing" or "ambiguous", or dietStatus is "ambiguous", write one
+        offTopic: true when the shopper's LATEST message (the request itself, or the latest answer in <follow_ups> if
+          there is one) has nothing to do with grocery shopping, e.g. a coding request, a general-knowledge question,
+          chit-chat, or a request to build something. false if it contains any shopping request or a usable answer,
+          even mixed with other things (then extract the shopping part as normal).
+        offTopicReply: when offTopic is true, one or two short, warm, casual New Zealand-English sentences: say you're
+          only the grocery helper (don't answer or help with the off-topic request), then either repeat the unanswered
+          question from <follow_ups> if there is one, or suggest one example request such as "weekly shop under $100,
+          we're vegetarian". Vary the wording naturally. null when offTopic is false.
+
+        clarifyingQuestion: if offTopic is false and budgetStatus is "missing" or "ambiguous", or dietStatus is "ambiguous", write one
           short, friendly question that asks for exactly that information and nothing else (combine both into one
           question if needed). Do not ask about the diet unless dietStatus is "ambiguous". Otherwise null.
 
@@ -91,7 +106,7 @@ public sealed class ShoppingRequestParser(ClaudeFoundry claude, ILogger<Shopping
         ["type"] = JsonSerializer.SerializeToElement("object"),
         ["additionalProperties"] = JsonSerializer.SerializeToElement(false),
         ["required"] = JsonSerializer.SerializeToElement(new[]
-            { "budget", "budgetStatus", "diet", "dietStatus", "seekDeals", "otherDietaryNeeds", "clarifyingQuestion" }),
+            { "budget", "budgetStatus", "diet", "dietStatus", "seekDeals", "otherDietaryNeeds", "offTopic", "offTopicReply", "clarifyingQuestion" }),
         ["properties"] = JsonSerializer.SerializeToElement(new Dictionary<string, object>
         {
             ["budget"] = new { anyOf = new object[] { new { type = "number" }, new { type = "null" } } },
@@ -100,6 +115,8 @@ public sealed class ShoppingRequestParser(ClaudeFoundry claude, ILogger<Shopping
             ["dietStatus"] = new { type = "string", @enum = new[] { "stated", "not_mentioned", "ambiguous" } },
             ["seekDeals"] = new { type = "boolean" },
             ["otherDietaryNeeds"] = new { anyOf = new object[] { new { type = "string" }, new { type = "null" } } },
+            ["offTopic"] = new { type = "boolean" },
+            ["offTopicReply"] = new { anyOf = new object[] { new { type = "string" }, new { type = "null" } } },
             ["clarifyingQuestion"] = new { anyOf = new object[] { new { type = "string" }, new { type = "null" } } },
         }),
     };
@@ -140,7 +157,7 @@ public sealed class ShoppingRequestParser(ClaudeFoundry claude, ILogger<Shopping
             "parse-request {Status} in {Ms} ms ({In} in / {Out} out tokens)\n  text: {Text}\n  follow-ups: {FollowUps}\n  model: {Model}\n  final: {Final}",
             response.Status, response.Usage.ElapsedMs, response.Usage.InputTokens, response.Usage.OutputTokens,
             text, followUps.Count, JsonSerializer.Serialize(extraction, LogJson),
-            JsonSerializer.Serialize(new { response.Parsed, response.ClarifyingQuestion }, LogJson));
+            JsonSerializer.Serialize(new { response.Parsed, response.ClarifyingQuestion, response.Redirect }, LogJson));
 
         return response;
     }
@@ -151,6 +168,15 @@ public sealed class ShoppingRequestParser(ClaudeFoundry claude, ILogger<Shopping
     /// </summary>
     internal static ParseResponse ApplyRules(ModelExtraction m, ParseUsage usage)
     {
+        // Not a shopping message at all: redirect, and extract nothing from it.
+        if (m.OffTopic)
+        {
+            string redirect = !string.IsNullOrWhiteSpace(m.OffTopicReply)
+                ? m.OffTopicReply.Trim()
+                : "I'm just the grocery helper, sorry! Tell me what you need this week, like \"weekly shop under $100, we're vegetarian\".";
+            return new ParseResponse("off_topic", new ParsedShoppingRequest(null, null, false, null), null, m, usage, redirect);
+        }
+
         bool noBudget = m.BudgetStatus == "none";
         // An explicit "no budget" is a clear answer; only a missing or vague budget needs a question.
         bool budgetClear = (m.BudgetStatus == "stated" && m.Budget is > 0) || noBudget;

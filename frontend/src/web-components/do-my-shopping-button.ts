@@ -18,13 +18,20 @@ const DEFAULT_LABEL = 'Do my shopping'
 const REQUEST_TIMEOUT_MS = 60_000
 // The agent makes several Claude calls in a row, so it gets longer.
 const BASKET_TIMEOUT_MS = 180_000
+const EXAMPLE_REQUESTS = [
+  "Weekly shop under $100, we're vegetarian",
+  'Feed two for under $60, grab the specials',
+  "Whatever's on sale, no budget",
+]
 const REQUEST_PLACEHOLDER = "e.g. Sort the weekly shop for two – under $100, we're vegetarian, and grab any specials"
 
 /** Response from POST /api/parse-request. */
 export interface ParseResponse {
-  status: 'parsed' | 'needs_clarification'
+  status: 'parsed' | 'needs_clarification' | 'off_topic'
   parsed: { budget: number | null; diet: string | null; seekDeals: boolean; otherDietaryNeeds: string | null }
   clarifyingQuestion: string | null
+  /** Set when status is 'off_topic': a friendly nudge back to shopping. */
+  redirect?: string | null
   model: Record<string, unknown>
   usage: { inputTokens: number; outputTokens: number; elapsedMs: number }
 }
@@ -327,6 +334,24 @@ template.innerHTML = `
     .basket li:last-child {
       border-bottom: none;
     }
+    .examples {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+    }
+    .example {
+      border: 1px solid var(--_border);
+      border-radius: 999px;
+      background: var(--_surface);
+      color: var(--_text);
+      padding: 4px 12px;
+    }
+    .example:hover {
+      border-color: var(--_brand);
+      color: var(--_brand);
+    }
     .basket .deal {
       margin-left: 8px;
       padding: 0 8px;
@@ -404,6 +429,9 @@ template.innerHTML = `
       </header>
       <p class="muted intro">Kia ora! Tell me what you need this week: a budget, any dietary needs, and whether I should hunt out the specials. I'll sort the trolley.</p>
       <ul class="transcript" aria-live="polite"></ul>
+      <div class="examples" role="group" aria-label="Example requests">
+        <span class="muted">Try:</span>
+      </div>
       <div class="outcome" hidden>
         <dl class="result">
           <dt>Budget</dt><dd data-field="budget"></dd>
@@ -513,6 +541,18 @@ export class DoMyShoppingButton extends HTMLElement {
       }
     })
     this.#input.placeholder = REQUEST_PLACEHOLDER
+    const examples = this.#$('.examples')
+    for (const text of EXAMPLE_REQUESTS) {
+      const button = document.createElement('button')
+      button.type = 'button'
+      button.className = 'example'
+      button.textContent = text
+      button.addEventListener('click', () => {
+        this.#input.value = text
+        this.#input.focus()
+      })
+      examples.append(button)
+    }
     this.#renderLabel()
   }
 
@@ -545,6 +585,7 @@ export class DoMyShoppingButton extends HTMLElement {
     const text = this.#input.value.trim()
     if (!text || this.#inFlight) return
 
+    const pendingBefore = this.#pendingQuestion
     if (this.#pendingQuestion) this.#followUps.push({ question: this.#pendingQuestion, answer: text })
     else this.#request = text
     this.#pendingQuestion = null
@@ -566,7 +607,7 @@ export class DoMyShoppingButton extends HTMLElement {
       })
       const body = await response.json().catch(() => null)
       if (!response.ok) throw new Error(body?.error ?? `The server returned ${response.status}.`)
-      this.#showResult(body as ParseResponse)
+      this.#showResult(body as ParseResponse, pendingBefore)
     } catch (err) {
       const cancelled = controller.signal.aborted &&
         !(controller.signal.reason instanceof DOMException && controller.signal.reason.name === 'TimeoutError')
@@ -594,12 +635,22 @@ export class DoMyShoppingButton extends HTMLElement {
     }
   }
 
-  #showResult(result: ParseResponse): void {
+  #showResult(result: ParseResponse, pendingBefore: string | null): void {
     console.info('[do-my-shopping] parse-request result', result)
     this.#$('.debug pre').textContent = JSON.stringify(result, null, 2)
     this.#$<HTMLDetailsElement>('.debug').hidden = false
 
-    if (result.status === 'needs_clarification' && result.clarifyingQuestion) {
+    if (result.status === 'off_topic') {
+      // Not a shopping message: it isn't part of the request, nor an answer to a pending question.
+      if (pendingBefore) {
+        this.#followUps.pop()
+        this.#pendingQuestion = pendingBefore
+      } else {
+        this.#request = null
+      }
+      this.#addBubble('assistant', result.redirect || "I'm just the grocery helper, sorry! What do you need this week?")
+      this.#$('.outcome').hidden = true
+    } else if (result.status === 'needs_clarification' && result.clarifyingQuestion) {
       this.#pendingQuestion = result.clarifyingQuestion
       this.#addBubble('assistant', result.clarifyingQuestion)
       this.#$('.outcome').hidden = true
@@ -756,6 +807,7 @@ export class DoMyShoppingButton extends HTMLElement {
     this.#input.hidden = done
     this.#submit.hidden = done
     this.#$('.intro').hidden = started
+    this.#$('.examples').hidden = started
     this.#$('.restart').hidden = !started
     this.#inputLabel.textContent = this.#pendingQuestion ? 'Your answer' : 'What are we shopping for?'
     this.#input.placeholder = this.#pendingQuestion ? 'Type your answer here' : REQUEST_PLACEHOLDER
